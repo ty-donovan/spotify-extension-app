@@ -1,17 +1,18 @@
 import React from 'react';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LoginPage from '../pages/loginPage/LoginPage';
+import HomePage from '../pages/homePage/HomePage'
+import NavigationBar from '../pages/homePage/NavigationBar';
 function App() {
   return (
-    <div style={{ textAlign: 'center' }}>
-      <header>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+     <Route path="/" element={<LoginPage />} />
+     <Route path="/:id" element={<NavigationBar />} >
+     <Route path="/:id/home" element={<HomePage />} />
+     </Route>
+     </Routes>
+    </BrowserRouter>
   );
 }
 
