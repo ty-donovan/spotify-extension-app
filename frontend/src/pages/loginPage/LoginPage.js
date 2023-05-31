@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, TextField, Snackbar, Alert, Box, Typography } from '@mui/material'
 import { Navigate } from 'react-router-dom'
 import axios from "axios";
+import HighResLogo from '../homePage/logo-high-res.png';
 
 function LoginPage({ setUser }) {
     const [username, setUsername] = useState("")
@@ -47,8 +48,8 @@ function LoginPage({ setUser }) {
         <>
         {!allUsers? <p1></p1> :
         <>
-        <h1 style={{textAlign: 'center'}}>Welcome to Spots</h1>
-        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt: '25vh', mx: '40%'}}>
+        <img src={HighResLogo} style={{width: "20%", margin: "auto", marginTop: "2%"}}/>
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt: '25vh', mx: '40%', margin: "3%"}}>
             
             <form onSubmit = {attemptLogin} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography variant='h4'>Log in</Typography>

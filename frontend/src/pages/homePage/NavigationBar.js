@@ -55,7 +55,7 @@ export default function NavigationBar() {
                     {size.width <= 600 &&
                         <details style={{width: "20%"}}>
                             <summary className='summary'>{<img src={lowResLogo}  style={{ justifySelf: "center", width: "45%"}} alt='Spots logo'/>}{<h4>Navigate</h4>}</summary>
-                            <details-menu role="menu" class="dropdown-menu" style={{ backgroundColor: "#e3dfde" }}>
+                            <details-menu role="menu" class="dropdown-menu" style={{ backgroundColor: "white" }}>
                             <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/home"}>Home</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
                                 <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
@@ -71,7 +71,7 @@ export default function NavigationBar() {
                             {size.width > 600 &&
                                 <summary>{currentUser.username}</summary>}
                             <summary></summary>
-                            <details-menu role="menu" class="dropdown-menu dropdown-menu-sw" style={{ backgroundColor: "#e3dfde" }}>
+                            <details-menu role="menu" class="dropdown-menu dropdown-menu-sw" style={{ backgroundColor: "white" }}>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/profile"}>Profile</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/inbox"}>Inbox</Button>
                                 <IconButton component={Link} to={"/"} className='logoutButton'>
