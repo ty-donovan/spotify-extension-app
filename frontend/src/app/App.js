@@ -11,6 +11,7 @@ import TopArtistsPage from '../pages/topArtistsPage/TopArtistsPage';
 import TopSongsPage from '../pages/topSongsPage/TopSongsPage';
 import DiscoverPage from '../pages/discoverPage/DiscoverPage';
 import OtherUserPage from '../pages/otherUserPage/OtherUserPage';
+import YourTastesPage from '../pages/yourTastesPage/YourTastesPage';
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
      <Route path="/:id/topSongs" element={<TopSongsPage />} />
      <Route path="/:id/discover" element={<DiscoverPage />} />
      <Route path="/:id/otherUser" element={<OtherUserPage />} />
+     <Route path="/:id/yourTastes" element={<YourTastesPage />} />
      </Route>
      </Routes>
     </BrowserRouter>

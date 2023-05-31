@@ -47,6 +47,7 @@ export default function NavigationBar() {
                         <ButtonGroup disableElevation >
                             <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
                             <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
+                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
                         </ButtonGroup>}
                     {size.width < 600 &&
                         <details>
@@ -54,6 +55,8 @@ export default function NavigationBar() {
                             <details-menu role="menu" class="dropdown-menu" style={{ backgroundColor: "#e3dfde" }}>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
                                 <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
+                                <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
+                                
                             </details-menu>
                         </details>
                     }
@@ -66,10 +69,6 @@ export default function NavigationBar() {
                             <details-menu role="menu" class="dropdown-menu dropdown-menu-sw" style={{ backgroundColor: "#e3dfde" }}>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/profile"}>Profile</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/inbox"}>Inbox</Button>
-                                <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/likedSongs"}>Liked Songs</Button>
-                                <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/topSongs"}>Top Songs</Button>
-                                <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/topArtists"}>Top Artists</Button>
-                                
                                 <IconButton component={Link} to={"/"} className='logoutButton'>
                                     <LogoutIcon sx={{ color: 'black' }} />
                                 </IconButton>
