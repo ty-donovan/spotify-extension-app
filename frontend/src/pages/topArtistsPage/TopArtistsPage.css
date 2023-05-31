@@ -1,0 +1,43 @@
+.topArtists-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.topArtist-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    margin: 10px;
+    width: 90%;
+    height: 40vh;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.topArtist-container img {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    object-fit: cover;
+    object-position: center;
+}
+
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.artist-info h1 {
+    margin-bottom: 80px;
+}
+
+.artist-info h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px;
+}
