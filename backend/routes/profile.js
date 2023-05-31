@@ -34,7 +34,6 @@ router.get("/checkUser", async (req, res, next) => {
 
 //verifying user on homepage
 router.put("/isUser", async (req, res, next) => {
-    console.log(req.body.id)
     const currentUser = await getDoc(doc(db, "users", req.body.id))
     res.json({result: currentUser})
 })
