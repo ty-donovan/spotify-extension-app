@@ -6,6 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import '@github/details-menu-element';
 import "./HomePage.css"
 import useWindowSize from './useWindowSize';
+import lowResLogo from './logo-low-res-cropped.png'
 export default function NavigationBar() {
 
     const size = useWindowSize();
@@ -37,26 +38,30 @@ export default function NavigationBar() {
     }, [userData])
 
     return (
-        <React.Fragment>
-            <AppBar style={{ backgroundColor: "black" }}>
+        <>
+            <AppBar style={{ backgroundColor: "#363535" }}>
                 <Toolbar>
-                    <IconButton component={Link} to={"/" + userId + "/home"}>
-                        <HomeIcon sx={{ color: 'white' }} />
-                    </IconButton>
+                    {size.width > 600 &&
+                    <IconButton component={Link} to={"/" + userId + "/home"} style={{width:"4%"}}>
+                        {/* <HomeIcon sx={{ color: 'white' }} /> */}
+                        <img src={lowResLogo}  alt='Spots logo'/>
+                    </IconButton>}
                     {size.width > 600 &&
                         <ButtonGroup disableElevation >
-                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
-                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
-                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "black", border: "none" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
+                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "#363535", border: "none" }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
+                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "#363535", border: "none" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
+                            <Button className='navButtons' sx={{ color: 'white', backgroundColor: "#363535", border: "none" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
                         </ButtonGroup>}
-                    {size.width < 600 &&
-                        <details>
-                            <summary className='summary'>Navigate</summary>
+                    {size.width <= 600 &&
+                        <details style={{width: "20%"}}>
+                            <summary className='summary'>{<img src={lowResLogo}  style={{ justifySelf: "center", width: "45%"}} alt='Spots logo'/>}{<h4>Navigate</h4>}</summary>
                             <details-menu role="menu" class="dropdown-menu" style={{ backgroundColor: "#e3dfde" }}>
+                            <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/home"}>Home</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
-                                <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
                                 <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
+                                <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
                                 
+
                             </details-menu>
                         </details>
                     }
@@ -64,7 +69,7 @@ export default function NavigationBar() {
                     {!currentUser ? <p1></p1> :
                         <details>
                             {size.width > 600 &&
-                                <summary className='summary'>{currentUser.username}</summary>}
+                                <summary>{currentUser.username}</summary>}
                             <summary></summary>
                             <details-menu role="menu" class="dropdown-menu dropdown-menu-sw" style={{ backgroundColor: "#e3dfde" }}>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/profile"}>Profile</Button>
@@ -80,6 +85,6 @@ export default function NavigationBar() {
             </AppBar>
             <Toolbar />
             <Outlet context={currentUser} />
-        </React.Fragment>
+        </>
     )
 }
