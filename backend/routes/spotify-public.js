@@ -5,7 +5,7 @@ const { getLikedSongs, getTopArtists, getTopTracks } = require("./spotify-api-me
 const db = require("./firebase");
 const { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc } = require("firebase/firestore");
 
-router.get('/private/top-artists-long-term', async (req, res) => {
+router.get('/public/top-artists-long-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopArtists(accessToken, "long_term");
@@ -13,7 +13,7 @@ router.get('/private/top-artists-long-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/top-artists-6-months-term', async (req, res) => {
+router.get('/public/top-artists-6-months-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopArtists(accessToken, "medium_term");
@@ -21,7 +21,7 @@ router.get('/private/top-artists-6-months-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/top-artists-1-month-term', async (req, res) => {
+router.get('/public/top-artists-1-month-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopArtists(accessToken, "short_term");
@@ -29,7 +29,7 @@ router.get('/private/top-artists-1-month-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/top-tracks-long-term', async (req, res) => {
+router.get('/public/top-tracks-long-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopTracks(accessToken, "long_term");
@@ -37,7 +37,7 @@ router.get('/private/top-tracks-long-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/top-tracks-6-months-term', async (req, res) => {
+router.get('/public/top-tracks-6-months-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopTracks(accessToken, "medium_term");
@@ -45,7 +45,7 @@ router.get('/private/top-tracks-6-months-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/top-tracks-1-month-term', async (req, res) => {
+router.get('/public/top-tracks-1-month-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const data = await getTopTracks(accessToken, "short_term");
@@ -53,7 +53,7 @@ router.get('/private/top-tracks-1-month-term', async (req, res) => {
     res.send(data);
 });
 
-router.get('/private/liked-songs', async (req, res) => {
+router.get('/public/liked-songs', async (req, res) => {
     const { id, accessToken } = req.body;
 
     const likedSongs = await getLikedSongs(accessToken);
@@ -99,8 +99,6 @@ async function addTracksToUser(userId, tracks, duration) {
             time: track.time,
         });
     });
-
-    const docRef = await tracksRef.add(tracks);
 }
 
 async function addLikedSongsToUser(userId, songs) {
@@ -120,6 +118,4 @@ async function addLikedSongsToUser(userId, songs) {
             time: song.time,
         });
     });
-
-    const docRef = await likedSongsRef.add(songs);
 }
