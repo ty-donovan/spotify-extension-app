@@ -13,8 +13,8 @@ async function getTopArtistsByTimeRange(token, timeRange) {
     return data.items;
 }
 
-async function getTopArtists(timeRange) {
-    const topArtists = await getTopArtistsByTimeRange(accessToken, timeRange);
+async function getTopArtists(token, timeRange) {
+    const topArtists = await getTopArtistsByTimeRange(token, timeRange);
 
     return topArtists.map(artist => ({
         image: artist.images[0].url,
@@ -37,14 +37,14 @@ async function getTopTracksByTimeRange(token, timeRange) {
     return data.items;
 }
 
-async function getTopTracks(timeRange) {
-    const topTracks = await getTopTracksByTimeRange(accessToken, timeRange);
+async function getTopTracks(token, timeRange) {
+    const topTracks = await getTopTracksByTimeRange(token, timeRange);
 
     return topTracks.map(track => ({
         image: track.album.images[0].url,
         name: track.name,
+        artist: track.artists[0].name,
         time: formatTime(track.duration_ms),
-        popularity: track.popularity,
     }));
 }
 
@@ -63,7 +63,13 @@ async function getLikedSongs(token) {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await result.json();
+    data = await result.json();
+    return data.items.map(item => ({
+        image: item.track.album.images[0].url,
+        name: item.track.name,
+        artist: item.track.artists[0].name,
+        time: formatTime(item.track.duration_ms),
+    }));
 }
 
 modules.exports = { getLikedSongs, getTopArtists, getTopArtistsByTimeRange, getTopTracks, getTopTracksByTimeRange };

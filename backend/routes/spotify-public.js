@@ -1,118 +1,125 @@
 const express = require('express');
 const router = express.Router();
-const axios  = require('axios');
+const { getLikedSongs, getTopArtists, getTopTracks } = require("./spotify-api-methods");
 
 const db = require("./firebase");
 const { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc } = require("firebase/firestore");
 
-router.get('/top-artists-long-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-artists-long-term');
-        const data = response.data;
+router.get('/private/top-artists-long-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top artists");
-    }
+    const data = await getTopArtists(accessToken, "long_term");
+    addArtistsToUser(id, data, "long_term");
+    res.send(data);
 });
 
-router.get('/top-artists-6-months-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-artists-6-months-term');
-        const data = response.data;
+router.get('/private/top-artists-6-months-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top artists");
-    }
+    const data = await getTopArtists(accessToken, "medium_term");
+    addArtistsToUser(id, data, "medium_term");
+    res.send(data);
 });
 
-router.get('/top-artists-1-month-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-artists-1-month-term');
-        const data = response.data;
+router.get('/private/top-artists-1-month-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top artists");
-    }
+    const data = await getTopArtists(accessToken, "short_term");
+    addArtistsToUser(id, data, "short_term");
+    res.send(data);
 });
 
-router.get('/top-artists-1-week-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-artists-1-week-term');
-        const data = response.data;
+router.get('/private/top-tracks-long-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top artists");
-    }
+    const data = await getTopTracks(accessToken, "long_term");
+    addTracksToUser(id, data, "long_term");
+    res.send(data);
 });
 
-router.get('/top-tracks-long-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-tracks-long-term');
-        const data = response.data;
+router.get('/private/top-tracks-6-months-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top tracks");
-    }
+    const data = await getTopTracks(accessToken, "medium_term");
+    addTracksToUser(id, data, "medium_term");
+    res.send(data);
 });
 
-router.get('/top-tracks-6-months-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-tracks-6-months-term');
-        const data = response.data;
+router.get('/private/top-tracks-1-month-term', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top tracks");
-    }
+    const data = await getTopTracks(accessToken, "short_term");
+    addTracksToUser(id, data, "short_term");
+    res.send(data);
 });
 
-router.get('/top-tracks-1-month-term', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/top-tracks-1-month-term');
-        const data = response.data;
+router.get('/private/liked-songs', async (req, res) => {
+    const { id, accessToken } = req.body;
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve top tracks");
-    }
+    const likedSongs = await getLikedSongs(accessToken);
+    addLikedSongsToUser(id, likedSongs);
+    res.send(likedSongs);
 });
 
-router.get('/liked-songs', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/spotify/private/liked-songs');
-        const data = response.data;
+async function addArtistsToUser(userId, artists, duration) {
+    const userRef = db.collection('users').doc(userId);
+    const colID = `artists-${duration}`
+    const artistsSnapshot = await userRef.collection(colID).limit(1).get();
 
-        //firebase stuff storage here
-
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to retrieve liked songs");
+    if (artistsSnapshot.empty) {
+        // Create artists subcollection if it doesn't exist
+        await userRef.createCollection(colID);
     }
-});
+
+    const artistsRef = userRef.collection(colID);
+    artists.forEach(artist => {
+        artistsRef.add({
+            image: artist.image,
+            name: artist.name,
+            popularity: artist.popularity,
+        });
+    });
+}
+
+async function addTracksToUser(userId, tracks, duration) {
+    const userRef = db.collection('users').doc(userId);
+    const colID = `tracks-${duration}`
+    const tracksSnapshot = await userRef.collection(colID).limit(1).get();
+
+    if (tracksSnapshot.empty) {
+        await userRef.createCollection(colID);
+    }
+
+    const tracksRef = userRef.collection(colID);
+    tracks.forEach(track => {
+        tracksRef.add({
+            image: track.image,
+            name: track.name,
+            artist: track.artist,
+            time: track.time,
+        });
+    });
+
+    const docRef = await tracksRef.add(tracks);
+}
+
+async function addLikedSongsToUser(userId, songs) {
+    const userRef = db.collection('users').doc(userId);
+    const likedSongsSnapshot = await userRef.collection('liked-songs').limit(1).get();
+
+    if (likedSongsSnapshot.empty) {
+        await userRef.createCollection('liked-songs');
+    }
+
+    const likedSongsRef = userRef.collection('liked-songs');
+    songs.forEach(song => {
+        likedSongsRef.add({
+            image: song.image,
+            name: song.name,
+            artist: song.artist,
+            time: song.time,
+        });
+    });
+
+    const docRef = await likedSongsRef.add(songs);
+}
