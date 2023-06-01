@@ -12,6 +12,7 @@ import TopSongsPage from '../pages/topSongsPage/TopSongsPage';
 import DiscoverPage from '../pages/discoverPage/DiscoverPage';
 import OtherUserPage from '../pages/otherUserPage/OtherUserPage';
 import YourTastesPage from '../pages/yourTastesPage/YourTastesPage';
+import ChatDetail from '../pages/inboxPage/ChatDetail';
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
      <Route path="/:id/home" element={<HomePage />} />
      <Route path="/:id/forum" element={<ForumPage />} />
      <Route path="/:id/inbox" element={<InboxPage />} />
+     <Route path="/:id/chats/:id" element={<ChatDetail />} />
      <Route path="/:id/likedSongs" element={<LikedSongsPage />} />
      <Route path="/:id/profile" element={<ProfilePage />} />
      <Route path="/:id/topArtists" element={<TopArtistsPage />} />

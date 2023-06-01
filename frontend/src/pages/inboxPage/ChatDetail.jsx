@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, TextField, Button, Box, Typography } from '@mui/material';
+// import { useParams } from 'react-router-dom';
+import { Box, Container, TextField, Button, styled } from '@mui/material';
 import Message from './Message';
 
-function ChatDetail({ match }) {
+const FixedBox = styled(Box)({
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: '10px', 
+    height: '80px',
+});
+
+const ScrollableBox = styled(Box)({
+    overflowY: 'scroll',
+    maxHeight: 'calc(100vh - 180px)', 
+});
+    
+
+const RelativeContainer = styled(Container)({
+    position: 'relative',
+    height: 'calc(100vh - 100px)', 
+  });
+
+function ChatDetail({ chatId }) {
   const [chat, setChat] = useState(null);
   const [message, setMessage] = useState('');
-  const { id } = useParams();
 
   useEffect(() => {
-    fetchChat();
-  }, []);
+    fetchChat(chatId);
+  }, [chatId]);
 
-  const fetchChat = async () => {
-    const res = await fetch(`http://localhost:9000/chats/${id}`);
+  const fetchChat = async (chatId) => {
+    const res = await fetch(`http://localhost:9000/chats/${chatId}`);
 
     const data = await res.json();
 
@@ -27,7 +46,7 @@ function ChatDetail({ match }) {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:9000/chats/${id}/messages`, {
+    const res = await fetch(`http://localhost:9000/chats/${chatId}/messages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ senderId: '0WTleMI17BqXAplfke4T', text: message }) 
@@ -37,19 +56,21 @@ function ChatDetail({ match }) {
 
     if (res.status === 200) {
       setMessage('');
-      fetchChat();
+      fetchChat(chatId);
     } else {
       console.error(data.error);
     }
   };
 
   return (
-    <Container>
-      {chat && chat.messages.map(message => (
-        <Message key={message.id} message={message} />
-      ))}
-      
-      <Box component="form" onSubmit={sendMessage} mt={2}>
+    <RelativeContainer>
+      <ScrollableBox>
+        {chat && chat.messages.map((message, index) => (
+          <Message key={message.id} message={message} />
+        ))}
+      </ScrollableBox>
+
+      <FixedBox component="form" onSubmit={sendMessage}>
         <TextField 
           variant="outlined" 
           margin="normal"
@@ -58,8 +79,8 @@ function ChatDetail({ match }) {
           onChange={(e) => setMessage(e.target.value)} 
         />
         <Button type="submit" variant="contained" color="primary">Send</Button>
-      </Box>
-    </Container>
+      </FixedBox>
+    </RelativeContainer>
   );
 }
 

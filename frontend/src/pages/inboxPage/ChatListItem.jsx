@@ -10,7 +10,7 @@ const StyledListItem = styled(ListItem)({
   },
 });
 
-function ChatListItem({ chat }) {
+function ChatListItem({ chat, onChatSelect }) {
   const [participants, setParticipants] = useState([]);
   const lastMessage = chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null;
 
@@ -40,8 +40,15 @@ function ChatListItem({ chat }) {
     }
   }
 
+  const handleChatClick = () => {
+    if (typeof onChatSelect === 'function') {
+      onChatSelect(chat.id);
+    }
+  }
+  
+
   return (
-    <StyledListItem component={RouterLink} to={`/chats/${chat.id}`} button>
+    <StyledListItem onClick={handleChatClick}>
       <ListItemText
         primary={
           <Typography variant="h6">

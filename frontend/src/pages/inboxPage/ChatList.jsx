@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ChatListItem from './ChatListItem';
 
-function ChatList() {
+function ChatList({ onChatSelect }) {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
@@ -26,10 +26,10 @@ function ChatList() {
   }   
 
   return (
-    <div>
-      {chats.map(chat => <ChatListItem key={chat.id} chat={chat} />)}
-    </div>
-  );
+        <div>
+        {chats.map(chat => <ChatListItem key={chat.id} chat={chat} onChatSelect={onChatSelect} />)}
+        </div>
+    );
 }
 
 export default ChatList;
