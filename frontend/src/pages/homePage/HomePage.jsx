@@ -6,8 +6,15 @@ import forum from './forum.jpg';
 import yourTastes from './your-tastes.png';
 import useWindowSize from './useWindowSize';
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, Typography } from '@mui/material';
-import { Link, Outlet, useParams } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { AccessTokenContext } from "../../accessTokenContext";
+import { useContext } from "react";
+
 function HomePage() {
+    const { accessToken } = useContext(AccessTokenContext);
+    console.log("accessToken: " + accessToken);
+
     const params = useParams();
     const userId = params.id;
     //for resizing 

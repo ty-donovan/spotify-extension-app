@@ -1,78 +1,62 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const fetch = require("node-fetch");
+require("dotenv").config();
 
-const clientId = process.env.spotify_client_id;
-const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+const client_id = process.env.client_id;
+const client_secret = process.env.secret;
+const redirect_uri = "http://localhost:3000";
+const scope =
+  "user-top-read user-library-read user-read-private user-read-email"; //<- needs to be updated based on what you want to do
 
-if (!code) {
-    console.log("No code in URL");
-    redirectToAuthCodeFlow(clientId);
-} else {
-    const accessToken = await getAccessToken(clientId, code);
-}
+router.get("/", async (req, res, next) => {
+  try {
+    const url =
+      "https://accounts.spotify.com/authorize?client_id=" +
+      client_id +
+      "&response_type=code&redirect_uri=" +
+      redirect_uri +
+      "&scope=" +
+      scope;
+    console.log(url);
+    res.status(200).json({ url: url });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 
-export async function redirectToAuthCodeFlow(clientId) {
-    console.log("redirecting to auth code flow");
+router.get("/callback", async (req, res, next) => {
+  try {
+    const code = req.query.code;
+    const url =
+      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" +
+      code +
+      "&redirect_uri=" +
+      redirect_uri;
+    const headers = {
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+    console.log(url);
+    console.log(headers);
+    fetch(url, { method: "post", headers: headers })
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        obj = {
+          token: data.access_token,
+        };
+        return obj;
+      })
+      .then((obj) => res.status(200).json(obj));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 
-    const verifier = generateCodeVerifier(128);
-    const challenge = await generateCodeChallenge(verifier);
-
-    localStorage.setItem("verifier", verifier);
-
-    const params = new URLSearchParams();
-    params.append("client_id", clientId);
-    params.append("response_type", "code");
-    params.append("redirect_uri", "http://localhost:5173/callback");
-
-    // change scope to get different data
-    // params.append("scope", "user-read-private user-read-email");
-    params.append("scope", "user-library-read");
-    params.append("code_challenge_method", "S256");
-    params.append("code_challenge", challenge);
-
-    document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
-}
-
-function generateCodeVerifier(length) {
-    let text = '';
-    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    for (let i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
-
-async function generateCodeChallenge(codeVerifier) {
-    const data = new TextEncoder().encode(codeVerifier);
-    const digest = await window.crypto.subtle.digest('SHA-256', data);
-    return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
-}
-
-
-// get Access token
-export async function getAccessToken(clientId, code) {
-    console.log("getting access token");
-
-    const verifier = localStorage.getItem("verifier");
-
-    const params = new URLSearchParams();
-    params.append("client_id", clientId);
-    params.append("grant_type", "authorization_code");
-    params.append("code", code);
-    params.append("redirect_uri", "http://localhost:5173/callback");
-    params.append("code_verifier", verifier);
-
-    const result = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params
-    });
-
-    const { access_token } = await result.json();
-    return access_token;
-}
+module.exports = router;

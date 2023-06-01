@@ -12,8 +12,11 @@ import TopSongsPage from '../pages/topSongsPage/TopSongsPage';
 import DiscoverPage from '../pages/discoverPage/DiscoverPage';
 import OtherUserPage from '../pages/otherUserPage/OtherUserPage';
 import YourTastesPage from '../pages/yourTastesPage/YourTastesPage';
+import AccessTokenProvider from '../accessTokenContext';
+
 function App() {
   return (
+    <AccessTokenProvider>
     <BrowserRouter>
     <Routes>
      <Route path="/" element={<LoginPage />} />
@@ -31,6 +34,7 @@ function App() {
      </Route>
      </Routes>
     </BrowserRouter>
+    </AccessTokenProvider>
   );
 }
 

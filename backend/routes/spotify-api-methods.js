@@ -1,16 +1,16 @@
 // SPOTIFY API METHODS
 
 async function getTopArtistsByTimeRange(token, timeRange) {
-    const result = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10`, {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10`, {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
 
-    if (!result.ok) {
-        throw new Error(`Failed to retrieve top artists: ${result.status} ${result.statusText}`);
+        const data = await result.json();
+        return data.items;
+    } catch (error) {
+        console.error(`Failed to retrieve top artists: ${error}`);
     }
-
-    const data = await result.json();
-    return data.items;
 }
 
 async function getTopArtists(token, timeRange) {
@@ -25,16 +25,16 @@ async function getTopArtists(token, timeRange) {
 
 
 async function getTopTracksByTimeRange(token, timeRange) {
-    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=16`, {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=10`, {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
 
-    if (!result.ok) {
-        throw new Error(`Failed to retrieve top tracks: ${result.status} ${result.statusText}`);
+        const data = await result.json();
+        return data.items;
+    } catch (error) {
+        console.error(`Failed to retrieve top tracks: ${error}`);
     }
-
-    const data = await result.json();
-    return data.items;
 }
 
 async function getTopTracks(token, timeRange) {
@@ -72,4 +72,4 @@ async function getLikedSongs(token) {
     }));
 }
 
-modules.exports = { getLikedSongs, getTopArtists, getTopArtistsByTimeRange, getTopTracks, getTopTracksByTimeRange };
+module.exports = { getLikedSongs, getTopArtists, getTopArtistsByTimeRange, getTopTracks, getTopTracksByTimeRange };

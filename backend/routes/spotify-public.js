@@ -8,57 +8,92 @@ const { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc } = requi
 router.get('/public/top-artists-long-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopArtists(accessToken, "long_term");
-    addArtistsToUser(id, data, "long_term");
-    res.send(data);
+    try {
+        const data = await getTopArtists(accessToken, "long_term");
+        addArtistsToUser(id, data, "long_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/top-artists-6-months-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopArtists(accessToken, "medium_term");
-    addArtistsToUser(id, data, "medium_term");
-    res.send(data);
+    try {
+        const data = await getTopArtists(accessToken, "medium_term");
+        addArtistsToUser(id, data, "medium_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/top-artists-1-month-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopArtists(accessToken, "short_term");
-    addArtistsToUser(id, data, "short_term");
-    res.send(data);
+    try {
+        const data = await getTopArtists(accessToken, "short_term");
+        addArtistsToUser(id, data, "short_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/top-tracks-long-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopTracks(accessToken, "long_term");
-    addTracksToUser(id, data, "long_term");
-    res.send(data);
+    try {
+        const data = await getTopTracks(accessToken, "long_term");
+        addTracksToUser(id, data, "long_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/top-tracks-6-months-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopTracks(accessToken, "medium_term");
-    addTracksToUser(id, data, "medium_term");
-    res.send(data);
+    try {
+        const data = await getTopTracks(accessToken, "medium_term");
+        addTracksToUser(id, data, "medium_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/top-tracks-1-month-term', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const data = await getTopTracks(accessToken, "short_term");
-    addTracksToUser(id, data, "short_term");
-    res.send(data);
+    try {
+        const data = await getTopTracks(accessToken, "short_term");
+        addTracksToUser(id, data, "short_term");
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.get('/public/liked-songs', async (req, res) => {
     const { id, accessToken } = req.body;
 
-    const likedSongs = await getLikedSongs(accessToken);
-    addLikedSongsToUser(id, likedSongs);
-    res.send(likedSongs);
+    try {
+        const likedSongs = await getLikedSongs(accessToken);
+        addLikedSongsToUser(id, likedSongs);
+        res.send(likedSongs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 async function addArtistsToUser(userId, artists, duration) {
@@ -119,3 +154,5 @@ async function addLikedSongsToUser(userId, songs) {
         });
     });
 }
+
+module.exports = router;

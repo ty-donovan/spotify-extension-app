@@ -4,6 +4,9 @@ import { Button, TextField, Snackbar, Alert, Box, Typography } from '@mui/materi
 import { Navigate } from 'react-router-dom'
 import axios from "axios";
 import HighResLogo from '../homePage/logo-high-res.png';
+import SpotifyLogin from './SpotifyLogin.jsx'
+import { AccessTokenContext } from "../../accessTokenContext";
+import { useContext } from "react";
 
 function LoginPage({ setUser }) {
     const [username, setUsername] = useState("")
@@ -11,6 +14,22 @@ function LoginPage({ setUser }) {
     const [showError, setShowError] = useState(false)
     const [currentUser, setCurrentUser] = useState(null)
     const [allUsers, setAllUsers] = useState([]);
+
+    const { accessToken, setAccessToken } = useContext(AccessTokenContext);
+    const path = window.location.search;
+    const searchParams = new URLSearchParams(path);
+    useEffect(() => {
+      if (searchParams.has("code")) {
+        const code = searchParams.get("code");
+        console.log("code", code);
+        fetch("http://localhost:9000/auth/callback?code=" + code)
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            if (data.token) setAccessToken(data.token);
+          });
+      }
+    }, []);
 
     useEffect(() => {
         getUsers();
@@ -49,6 +68,7 @@ function LoginPage({ setUser }) {
         {!allUsers? <p1></p1> :
         <>
         <img src={HighResLogo} style={{width: "20%", margin: "auto", marginTop: "2%"}}/>
+        {accessToken ? "" : <SpotifyLogin />}
         <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt: '25vh', mx: '40%', margin: "3%"}}>
             
             <form onSubmit = {attemptLogin} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
