@@ -1,0 +1,40 @@
+.profileBox {
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(rgb(218, 218, 218), gray);
+}
+
+.textBox {
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.displayName {
+    font-size: 500%;
+}
+
+.username {
+    font-size: 180%;
+}
+
+.bioBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgb(100, 100, 100);
+}
+
+.editBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageBox {
+    width: 25%;
+}
+
+.profilePic {
+    width: 100%;
+}

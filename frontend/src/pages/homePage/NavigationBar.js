@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AppBar, Toolbar, Button, Box, IconButton, ButtonGroup } from '@mui/material'
 import { Link, Outlet, useParams } from 'react-router-dom'
-import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout';
 import '@github/details-menu-element';
 import "./HomePage.css"
@@ -33,8 +32,10 @@ export default function NavigationBar() {
 
     }, [userId])
     useEffect(() => {
-        if (userData)
-            setCurrentUser({ username: userData.result._document.data.value.mapValue.fields.username.stringValue })
+        if (userData) {
+            console.log(userData)
+            setCurrentUser({ username: userData.result.username })
+        }
     }, [userData])
 
     return (
@@ -42,10 +43,10 @@ export default function NavigationBar() {
             <AppBar style={{ backgroundColor: "#363535" }}>
                 <Toolbar>
                     {size.width > 600 &&
-                    <IconButton component={Link} to={"/" + userId + "/home"} style={{width:"4%"}}>
-                        {/* <HomeIcon sx={{ color: 'white' }} /> */}
-                        <img src={lowResLogo}  alt='Spots logo'/>
-                    </IconButton>}
+                        <IconButton component={Link} to={"/" + userId + "/home"} style={{ width: "4%" }}>
+                            {/* <HomeIcon sx={{ color: 'white' }} /> */}
+                            <img src={lowResLogo} alt='Spots logo' />
+                        </IconButton>}
                     {size.width > 600 &&
                         <ButtonGroup disableElevation >
                             <Button className='navButtons' sx={{ color: 'white', backgroundColor: "#363535", border: "none" }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
@@ -53,14 +54,14 @@ export default function NavigationBar() {
                             <Button className='navButtons' sx={{ color: 'white', backgroundColor: "#363535", border: "none" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
                         </ButtonGroup>}
                     {size.width <= 600 &&
-                        <details style={{width: "20%"}}>
-                            <summary className='summary'>{<img src={lowResLogo}  style={{ justifySelf: "center", width: "45%"}} alt='Spots logo'/>}{<h4>Navigate</h4>}</summary>
+                        <details style={{ width: "20%" }}>
+                            <summary className='summary'>{<img src={lowResLogo} style={{ justifySelf: "center", width: "45%" }} alt='Spots logo' />}{<h4>Navigate</h4>}</summary>
                             <details-menu role="menu" class="dropdown-menu" style={{ backgroundColor: "white" }}>
-                            <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/home"}>Home</Button>
+                                <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/home"}>Home</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/discover"}>Discover</Button>
                                 <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/yourTastes"}>Your Tastes</Button>
                                 <Button sx={{ color: 'black', textAlign: "center" }} component={Link} to={"/" + userId + "/forum"}>Forum</Button>
-                                
+
 
                             </details-menu>
                         </details>
