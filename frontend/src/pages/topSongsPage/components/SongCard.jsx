@@ -4,7 +4,7 @@ import "../../topArtistsPage/components/ArtistsCard.css"
 
 function SongCard({ url, rank, name, artist, time }) {
   return (
-    <div className="card">
+    <div className="top-card">
       <img
         src={url}
         alt="artist photo"
@@ -13,8 +13,8 @@ function SongCard({ url, rank, name, artist, time }) {
       />
       <div>
         <h2>{name}</h2>
-        <p>Artist: {artist}</p>
-        <p>Time: {time}</p>
+        <p>By: {artist}</p>
+        <p>Duration: {time}</p>
       </div>
       <div className="box">
         <p>#{rank}</p>

@@ -1,10 +1,10 @@
 .main-wrapper {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   align-items: center;
-  background-color: var(--black);
-  color: white;
-  border: 1px solid black;
+  background-color: rgb(218, 218, 218);
+  color: black;
   height: 100vh;
   overflow: scroll;
   padding-bottom: 60px;
@@ -20,27 +20,27 @@
   margin-left: 20px;
   padding: 10px;
   width: 7vw;
-  border: 1px solid white;
+  border: 1px solid #363535;
   background-color: transparent;
-  color: white;
+  color: #363535;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
 .button-wrapper button:hover {
-  background-color: white;
-  color: black;
+  background-color: #363535;
+  color: white;
 }
 
 .button-wrapper button.selected {
-  background-color: white;
-  color: black;
+  background-color: #363535;
+  color: white;
 }
 
 .main-container {
   display: grid;
-  background-color: rgba(35, 43, 43, 0.8);
+  background-color: rgba(54, 53, 53, 0.5);
   grid-template-columns: 1fr 2fr 2fr;
   margin: 20px;
   width: 90%;
@@ -58,6 +58,7 @@
 .info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin: 10px;
   padding: 30px 10px 10px 10px;
@@ -72,7 +73,6 @@
 
 .info h2 {
   font-size: 2.3rem;
-  font-weight: bold;
   margin: 10px;
 }
 
@@ -80,7 +80,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: black;
+  background-color: rgb(218, 218, 218);
   font-size: 2rem;
   padding: 30px;
   align-items: center;
@@ -107,6 +107,7 @@
 
   .main-container {
     display: flex;
+    margin-top: 0px;
     flex-direction: column;
     margin: 20px;
     width: 90%;
@@ -124,6 +125,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: 0px 0px 0px 0px;
     padding: 0px;
     width: 100%;
@@ -131,7 +133,6 @@
   }
 
   .info h1 {
-    padding-top: 10%;
     margin-bottom: 0px;
     font-size: 3em;
   }
@@ -146,7 +147,7 @@
   .title-wrapper {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: rgb(218, 218, 218);
     padding: 0px;
     font-size: 2rem;
     align-items: center;

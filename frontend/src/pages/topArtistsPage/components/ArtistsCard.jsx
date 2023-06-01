@@ -1,9 +1,9 @@
 import React from "react";
 import "./ArtistsCard.css";
 
-function ArtistsCard({ url, rank }) {
+function ArtistsCard({ url, rank, name, popularity }) {
   return (
-    <div className="card">
+    <div className="top-card">
       <img
         src={url}
         alt="artist photo"
@@ -11,8 +11,7 @@ function ArtistsCard({ url, rank }) {
         height={300}
       />
       <div>
-        <h2>Artist's Name</h2>
-        <p>Artist's Popularity</p>
+        <h2>{name}</h2>
       </div>
       <div className="box">
         <p>#{rank}</p>
