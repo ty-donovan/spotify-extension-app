@@ -15,6 +15,7 @@ async function getTopArtistsByTimeRange(token, timeRange) {
 
 async function getTopArtists(token, timeRange) {
     const topArtists = await getTopArtistsByTimeRange(token, timeRange);
+    console.log(topArtists);
 
     return topArtists.map(artist => ({
         image: artist.images[0].url,
@@ -59,7 +60,7 @@ function formatTime(timeInMs) {
 async function getLikedSongs(token) {
     console.log("fetching most recent 30 liked songs");
 
-    const result = await fetch("https://api.spotify.com/v1/me/tracks?limit=30", {
+    const result = await fetch("https://api.spotify.com/v1/me/tracks?limit=48", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
