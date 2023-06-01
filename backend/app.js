@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 
 var profileRouter = require('./routes/profile');
 var spotifyRouter = require('./routes/spotify');
+var chatsRouter = require('./routes/chats');
 
 var app = express();
 
 // cors configuration
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -29,8 +32,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/profile', profileRouter);
-app.use('/spotify', spotifyRouter);
+// app.use('/profile', profileRouter);
+// app.use('/spotify', spotifyRouter);
+app.use('/chats', chatsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
