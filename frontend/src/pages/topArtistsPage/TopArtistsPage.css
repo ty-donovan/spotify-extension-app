@@ -1,4 +1,4 @@
-.topArtists-wrapper {
+.main-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,7 @@
   color: black;
 }
 
-.topArtist-container {
+.main-container {
   display: grid;
   background-color: rgba(35, 43, 43, 0.8);
   grid-template-columns: 1fr 2fr 2fr;
@@ -48,14 +48,14 @@
   /* border: 2px solid green; */
 }
 
-.topArtist-container img {
+.main-container img {
   width: 100%;
   height: 40vh;
   object-fit: cover;
   object-position: center;
 }
 
-.artist-info {
+.info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,18 +65,18 @@
   height: calc(100% - 40px);
 }
 
-.artist-info h1 {
+.info h1 {
   margin-bottom: 80px;
   font-size: 3em;
 }
 
-.artist-info h2 {
+.info h2 {
   font-size: 2.3rem;
   font-weight: bold;
   margin: 10px;
 }
 
-.your-top-song {
+.title-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -87,7 +87,7 @@
   height: 40vh;
 }
 
-.other-artists {
+.other-elements {
   display: grid;
   width: 90%;
   grid-template-columns: 1fr 1fr 1fr;
@@ -105,7 +105,7 @@
     width: 80%;
   }
 
-  .topArtist-container {
+  .main-container {
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -113,14 +113,14 @@
     height: auto;
   }
 
-  .topArtist-container img {
+  .main-container img {
     width: 100%;
     height: 40vh;
     object-fit: cover;
     object-position: center;
   }
 
-  .artist-info {
+  .info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,20 +130,20 @@
     height: 40vh;
   }
 
-  .artist-info h1 {
+  .info h1 {
     padding-top: 10%;
     margin-bottom: 0px;
     font-size: 3em;
   }
   
-  .artist-info h2 {
+  .info h2 {
     padding-top: 15%;
     font-size: 2.3rem;
     font-weight: bold;
     margin: 0px;
   }
 
-  .your-top-song {
+  .title-wrapper {
     display: flex;
     flex-direction: column;
     background-color: black;
@@ -153,7 +153,7 @@
     height: auto;
   }
 
-  .other-artists {
+  .other-elements {
     display: flex;
     flex-direction: column;
   }

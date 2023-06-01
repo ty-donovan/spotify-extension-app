@@ -51,7 +51,7 @@
     padding-top: 20px;
 }*/
 
-.artistscard {
+.card {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,14 +60,14 @@
   /* border: 2px solid green; */
 }
 
-.artistscard img {
+.card img {
   width: 55%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.artistscard div {
+.card div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,16 +77,16 @@
   height: calc(100% - 2em);
 }
 
-.artistscard div h2 {
+.card div h2 {
   font-size: calc(2em - 0.08vw);
   margin: 0;
 }
 
-.artistscard div p {
+.card div p {
   font-size: calc(1.5em - 0.08vw);
 }
 
-.artistscard .box {
+.card .box {
   position: absolute;
   width: 10%;
   height: 10%;
@@ -96,7 +96,7 @@
   justify-content: center;
 }
 
-.artistscard .box p {
+.card .box p {
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
@@ -105,32 +105,32 @@
 }
 
 @media (max-width: 768px) {
-  .artistscard {
+  .card {
     flex-direction: column;
     height: auto;
   }
 
-  .artistscard img {
+  .card img {
     width: 100%;
     height: auto;
   }
 
-  .artistscard div {
+  .card div {
     padding: 20px;
     width: 100%;
   }
 
-  .artistscard div h2 {
+  .card div h2 {
     font-size: 1.5em;
     margin: 10px 0;
   }
 
-  .artistscard div p {
+  .card div p {
     font-size: 1em;
     margin: 10px 0;
   }
 
-  .artistscard .box {
+  .card .box {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -139,5 +139,5 @@
     right: 0;
     display: flex;
     justify-content: center;
-}
+  }
 }

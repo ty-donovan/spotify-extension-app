@@ -1,7 +1,8 @@
 import React from "react";
-import "./ArtistsCard.css";
+import "./SongCard.css";
+import "../../topArtistsPage/components/ArtistsCard.css"
 
-function ArtistsCard({ url, rank }) {
+function SongCard({ url, rank, name, artist, time }) {
   return (
     <div className="card">
       <img
@@ -11,8 +12,9 @@ function ArtistsCard({ url, rank }) {
         height={300}
       />
       <div>
-        <h2>Artist's Name</h2>
-        <p>Artist's Popularity</p>
+        <h2>{name}</h2>
+        <p>Artist: {artist}</p>
+        <p>Time: {time}</p>
       </div>
       <div className="box">
         <p>#{rank}</p>
@@ -21,4 +23,4 @@ function ArtistsCard({ url, rank }) {
   );
 }
 
-export default ArtistsCard;
+export default SongCard;
