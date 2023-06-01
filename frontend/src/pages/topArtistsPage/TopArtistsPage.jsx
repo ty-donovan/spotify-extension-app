@@ -1,10 +1,23 @@
 import React from "react";
 import "./TopArtistsPage.css";
 import ArtistsCard from "./components/ArtistsCard";
+import { useState, useEffect } from "react";
 
 function TopArtistsPage() {
+
+  const [selectedButton, setSelectedButton] = useState("12 Months +");
+
+  const handleClick = (e) => {
+    setSelectedButton(e.target.innerText);
+  };
+
   return (
     <div className="topArtists-wrapper">
+      <div className="button-wrapper">
+        <button className={selectedButton === '12 Months +' ? 'selected' : ''} onClick={handleClick}>12 Months +</button>
+        <button className={selectedButton === '6 Months' ? 'selected' : ''} onClick={handleClick}>6 Months</button>
+        <button className={selectedButton === '1 Month' ? 'selected' : ''} onClick={handleClick}>1 Month</button>
+      </div>
       <div className="topArtist-container">
         <div className="your-top-song">
             <h1>Your</h1>
@@ -23,7 +36,7 @@ function TopArtistsPage() {
         </div>
       </div>
       <div className="other-artists">
-        <ArtistsCard url={"https://www.vectornator.io/blog/content/images/2022/03/611b830385d20348a9809a8e_Cover-Album-Covers--1-.png"} rank={2}/>
+        <ArtistsCard url={"https://www.wymeruk.co.uk/_webedit/cached-images/1162-2085-0-640-638.jpg"} rank={2}/>
         <ArtistsCard url={"https://images.squarespace-cdn.com/content/v1/53b6eb62e4b06e0feb2d8e86/1607362705516-R5Q22H4FVIVPNMW8OWD7/SamSpratt_KidCudi_ManOnTheMoon3_AlbumCover_Web.jpg?format=1500w"} rank={3}/>
         <ArtistsCard url={"https://www.graphicdesignforum.com/uploads/default/original/2X/d/d3c4e744046205a49d06beb874df3b39da7c9c73.jpeg"} rank={4}/>
         <ArtistsCard url={"https://publish.one37pm.net/wp-content/uploads/2023/01/All-Time-Best-Album-Covers-Mobile-Images-ONE37pm.com-11.png?resize=720%2C780"} rank={5}/>
