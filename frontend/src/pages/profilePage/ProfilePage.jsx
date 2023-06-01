@@ -177,8 +177,9 @@ function ProfilePage() {
                     </div>
                     {!isEdit &&
                         <div className='bioBox'>
-                            <h1>About:</h1>
-                            {userProfile.favoriteAlbum &&
+                            {(userProfile.bio || userProfile.favoriteArtist || userProfile.favoriteSong || userProfile.favoriteAlbum) &&
+                                <h1>About:</h1>}
+                            {userProfile.bio &&
                                 <h2>{userProfile.bio}</h2>
                             }
                             {userProfile.favoriteArtist &&

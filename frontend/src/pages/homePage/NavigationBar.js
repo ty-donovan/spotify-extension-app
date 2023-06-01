@@ -33,7 +33,6 @@ export default function NavigationBar() {
     }, [userId])
     useEffect(() => {
         if (userData) {
-            console.log(userData)
             setCurrentUser({ username: userData.result.username })
         }
     }, [userData])

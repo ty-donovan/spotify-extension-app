@@ -19,7 +19,6 @@ router.get("/checkUser", async (req, res, next) => {
         allDocData[index].id = doc.id
         index++;
     })
-    console.log(allDocData)
     res.json({ result: allDocData })
 
 })
