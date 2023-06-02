@@ -1,5 +1,5 @@
-/node_modules
 
-.env
-
-permissions.json
+node_modules
+/.env
+/package-lock.json
+/permissions.json

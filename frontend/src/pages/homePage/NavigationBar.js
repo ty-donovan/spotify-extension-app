@@ -7,13 +7,12 @@ import "./HomePage.css"
 import useWindowSize from './useWindowSize';
 import lowResLogo from './logo-low-res-cropped.png'
 export default function NavigationBar() {
+  const size = useWindowSize();
 
-    const size = useWindowSize();
-
-    const params = useParams();
-    const userId = params.id;
-    const [currentUser, setCurrentUser] = useState(null)
-    const [userData, setUserData] = useState()
+  const params = useParams();
+  const userId = params.id;
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userData, setUserData] = useState();
 
     async function getUserData(id) {
         let content = { id: id };
