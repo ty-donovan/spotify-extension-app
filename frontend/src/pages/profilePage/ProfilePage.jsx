@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams, useOutletContext } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
 import { Button, TextField } from '@mui/material';
 import silhouette from './silhouette.png';
 import './ProfilePage.css';

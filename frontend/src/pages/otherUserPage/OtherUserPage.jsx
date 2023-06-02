@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom'
-import { Button, TextField } from '@mui/material';
+import { useParams } from 'react-router-dom'
+import { Button } from '@mui/material';
 import silhouette from '../profilePage/silhouette.png';
 import '../profilePage/ProfilePage.css';
 import useWindowSize from '../homePage/useWindowSize';
