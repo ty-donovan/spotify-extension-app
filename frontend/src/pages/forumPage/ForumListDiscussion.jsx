@@ -12,7 +12,7 @@ export default function DiscussionPosts({
 }) {
   const [allUsers, setAllUsers] = useState();
   if (currentUser) {
-    currentUser = currentUser.result.username.stringValue;
+    currentUser = currentUser.result.username;
   }
 
   const navigate = useNavigate();
