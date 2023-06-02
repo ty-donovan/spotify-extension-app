@@ -1,10 +1,8 @@
 import PostedBoard from "./ForumListDiscussion";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./ForumPage.css";
 
 export default function FilterSearch({ searchUser }) {
-  const [isPosts, setPosts] = useState();
-
   return (
     <>
       {searchUser.length === 0 ? (

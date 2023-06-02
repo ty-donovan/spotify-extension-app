@@ -120,7 +120,6 @@ router.post("/forum/users", async function (req, res) {
 //checking entered username and password
 async function userAndPasswordMatch(username, password) {
   const users = collection(db, "users");
-  console.log(users);
   const q = query(
     users,
     where("username", "==", username),
@@ -158,7 +157,6 @@ router.get("/checkUser", async (req, res, next) => {
     allDocData[index].id = doc.id;
     index++;
   });
-  console.log(allDocData);
   res.json({ result: allDocData });
 });
 

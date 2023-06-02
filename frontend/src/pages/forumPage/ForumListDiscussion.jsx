@@ -17,7 +17,6 @@ export default function DiscussionPosts({
         .stringValue;
   }
 
-  const [hasVoted, setHasVoted] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const goToPostPage = () => {
@@ -89,8 +88,12 @@ export default function DiscussionPosts({
         <p> {name}</p>
         <p>{message}</p>
       </div>
-      <button onClick={addOrRemoveUpLikes}>Likes: {likes.length}</button>
-      <button onClick={addOrRemoveDownLikes}>Dislike: {dislikes.length}</button>
+      <button className="button-wrapper" onClick={addOrRemoveUpLikes}>
+        Likes: {likes.length}
+      </button>
+      <button className="button-wrapper" onClick={addOrRemoveDownLikes}>
+        Dislike: {dislikes.length}
+      </button>
     </>
   );
 }

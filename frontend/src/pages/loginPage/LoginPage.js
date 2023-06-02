@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
 
 function LoginPage({ setUser }) {
   const [username, setUsername] = useState("");
