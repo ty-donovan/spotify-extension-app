@@ -64,7 +64,7 @@ function OtherUserPage() {
                                     }
 
                                     <h2 className='username'>Username: {userProfile.username}</h2>
-                                    {userProfile.displayName ? <Button>Message {userProfile.displayName}</Button> :
+                                    {userProfile.displayName ? <Button sx={{ marginTop: "1%", color: "white", border: "none", backgroundColor: "#363535" }}>Message {userProfile.displayName}</Button> :
                                         <Button sx={{ marginTop: "1%", color: "white", border: "none", backgroundColor: "#363535" }}>Message {userProfile.username}</Button>}
                                 </>}
                             {(size.width <= 600) &&

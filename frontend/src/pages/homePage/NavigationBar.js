@@ -69,8 +69,8 @@ export default function NavigationBar() {
                     {!currentUser ? <p1></p1> :
                         <details>
                             {size.width > 600 &&
-                                <summary>{currentUser.username}</summary>}
-                            <summary></summary>
+                                <summary style={{ cursor: "pointer" }}>{currentUser.username}</summary>}
+                            <summary style={{ cursor: "pointer" }}></summary>
                             <details-menu role="menu" class="dropdown-menu dropdown-menu-sw" style={{ backgroundColor: "white" }}>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/profile"}>Profile</Button>
                                 <Button sx={{ color: 'black' }} component={Link} to={"/" + userId + "/inbox"}>Inbox</Button>

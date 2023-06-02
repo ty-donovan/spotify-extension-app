@@ -10,11 +10,11 @@ export default function DiscoverPage() {
 
     const size = useWindowSize();
     //useStates to load components
-    const [isEdit, setIsEdit] = useState(false);
     const [isDataChanged, setIsDataChanged] = useState(false);
     //fetching database data
-    const [allUsers, setAllUsers] = useState([])
-    const [filteredUsers, setFilteredUsers] = useState([])
+    const [allUsers, setAllUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [isSearch, setIsSearch] = useState(false);
     useEffect(() => {
         getUsers()
     }, [isDataChanged])
@@ -49,6 +49,7 @@ export default function DiscoverPage() {
         const formJson = Object.fromEntries(formData.entries());
         setSearchInput(formJson.searched)
         changeIsDataChanged(!isDataChanged);
+        setIsSearch(true);
     };
 
     //clear search button
@@ -56,6 +57,7 @@ export default function DiscoverPage() {
         setSearchInput("");
         setFilteredUsers([]);
         changeIsDataChanged(!isDataChanged);
+        setIsSearch(false);
     }
 
     return (
@@ -80,7 +82,7 @@ export default function DiscoverPage() {
             {!filteredUsers ? <p1></p1> :
                 <div className='resultsTable'>
                     <div className='scrollBox'>
-                        <SearchResults data={filteredUsers} />
+                        <SearchResults data={filteredUsers} isSearch={isSearch} />
                     </div>
                 </div>
             }

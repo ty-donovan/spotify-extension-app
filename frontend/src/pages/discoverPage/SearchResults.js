@@ -3,12 +3,13 @@ import silhouette from '../profilePage/silhouette.png';
 import useWindowSize from '../homePage/useWindowSize';
 import { Link, useParams } from 'react-router-dom'
 import { Container } from '@mui/material';
-export default function SearchResults({ data }) {
+export default function SearchResults({ data, isSearch }) {
 
     const params = useParams();
     const userId = params.id;
     const size = useWindowSize();
     const [filteredData, setFilteredData] = useState([])
+    const [pics, setPics] = useState([]);
 
     useEffect(() => {
         setFilteredData(data.filter((element) => {
@@ -16,9 +17,31 @@ export default function SearchResults({ data }) {
         }))
     }, [data])
 
+    async function getPhotos(id) {
+        let content = { id: id }
+        let thisPic;
+        await fetch("http://localhost:9000/profile/get-list", {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => setPics(data))
+    }
+
+    useEffect(() => {
+        getPhotos()
+    }, [])
+
+    useEffect(() => {
+        console.log(pics)
+    }, [pics])
+
     return (
         <>
-            {filteredData.length === 0 &&
+            {(filteredData.length === 0 && isSearch) && <h3 style={{ marginTop: "2%" }}>No Users Found</h3>}
+            {(filteredData.length === 0 && !isSearch) &&
                 <h2 style={{ marginTop: "2%" }}>Search for likeminded people, and start a conversation.</h2>}
             {filteredData.length > 0 &&
                 <div className='searchBox'>

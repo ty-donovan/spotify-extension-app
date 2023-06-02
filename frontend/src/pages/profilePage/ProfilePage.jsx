@@ -15,6 +15,8 @@ function ProfilePage() {
     const [selectedImage, setSelectedImage] = useState();
     const [isEdit, setIsEdit] = useState(false);
     const [isDataChanged, setIsDataChanged] = useState(false);
+    const [profilePic, setProfilePic] = useState();
+    const [isPictureChanged, setIsPictureChanged] = useState(false)
     //fetching current user
     async function getUserData(id) {
         let content = { id: id };
@@ -46,17 +48,20 @@ function ProfilePage() {
                 favoriteAlbum: userData.result.favoriteAlbum,
             })
     }, [userData])
-
-    function uploadPicture(e) {
-        e.preventDefault();
-        console.log(selectedImage)
-        fetch("http://localhost:9000/profile/upload", {
-            method: "post",
-            headers: {
-                "Content-Type": "image/jpeg"
-            },
-            body: selectedImage
-        }).catch(error => { console.log(error) })
+    useEffect(() => {
+        getPic()
+    }, [isPictureChanged])
+    async function uploadPicture() {
+        if (selectedImage) {
+            await fetch("http://localhost:9000/profile/upload", {
+                method: "post",
+                headers: {
+                    "Content-Type": "image/jpeg"
+                },
+                body: selectedImage
+            }).catch(error => { console.log(error) })
+            setIsPictureChanged(!isPictureChanged);
+        }
     }
     //toggle edit view
     function toggleEdit() {
@@ -79,6 +84,7 @@ function ProfilePage() {
             },
             body: JSON.stringify(content)
         })
+        await uploadPicture();
         setIsEdit(!isEdit)
         setIsDataChanged(!isDataChanged)
     }
@@ -99,13 +105,26 @@ function ProfilePage() {
         setIsDataChanged(!isDataChanged)
     }
 
+    async function getPic() {
+        let content = { id: userId }
+        await fetch("http://localhost:9000/profile/get-picture", {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(content)
+        })
+            .then((response) => response.json())
+            .then((data) => setProfilePic(data))
+    }
+
     return (
         <>
             {!userProfile ? <h1>Loading...</h1> :
                 <>
                     <div className='profileBox'>
                         <div className='imageBox'>
-                            <img src={silhouette} alt='profile picture' className='profilePic'></img>
+                            <img src={profilePic ? profilePic.url : silhouette} alt='profile picture' className='profilePic'></img>
                         </div>
                         <div className='textBox'>
                             {(size.width > 600 && !isEdit) &&
@@ -161,19 +180,18 @@ function ProfilePage() {
                                         <TextField name='favoriteAlbum' defaultValue={userProfile.favoriteAlbum ? userProfile.favoriteAlbum : "Your favorite album"} style={{ backgroundColor: "rgb(218, 218, 218)" }} />
                                         <p1>Bio:</p1>
                                         <textArea name='bio' resize="none" style={{ backgroundColor: "rgb(218, 218, 218)", resize: "none" }}>{userProfile.bio ? userProfile.bio : "Bio goes here."}</textArea>
+                                        <p1>Change Profile Pic:</p1>
+                                        <input className="uploadButton" type='file' name='image' onChange={(event) => {
+                                            setSelectedImage(event.target.files[0]);
+                                        }} accept="image/jpeg, image/png" />
                                         <Button type='submit' variant="contained" color="success" sx={{ marginTop: "3%", color: "white", border: "none", width: "20%" }}>Save</Button>
                                     </div>
                                 </form>
                                 <Button color='error' variant='contained' sx={{ marginTop: "3%", color: "white", border: "none" }} onClick={() => toggleEdit()}>Stop Editing</Button>
+
                             </div>}
 
                         </div>
-                        {/* <form method='post' onSubmit={uploadPicture}>
-                        <input type='file' name='image' onChange={(event) => {
-                            setSelectedImage(event.target.files[0]);
-                        }} />
-                        <Button variant='contained' type='submit'>Save</Button>
-                    </form> */}
                     </div>
                     {!isEdit &&
                         <div className='bioBox'>
