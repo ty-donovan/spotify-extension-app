@@ -45,7 +45,7 @@ body {
     opacity: 50%;
 }
 
-.homePage{
+.homePage {
     margin: auto;
     margin-top: 2%;
     width: 85%;
@@ -86,5 +86,6 @@ body {
 }
 
 .subTitleText {
-    margin-top: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }

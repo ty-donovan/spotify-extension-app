@@ -1,0 +1,46 @@
+.result {
+    display: flex;
+    flex-direction: row;
+    border: groove;
+    border-top: none;
+}
+
+.result:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.searchBox {
+    border-top: groove;
+    scroll-behavior: auto;
+    height: 750px;
+}
+
+.imgBox {
+    width: 12%;
+}
+
+.searchBar {
+    margin-top: 2%;
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+.form {
+    width: 100%;
+    justify-content: center;
+}
+
+.formData {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    font-size: 500%;
+}

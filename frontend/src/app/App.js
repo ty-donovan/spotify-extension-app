@@ -14,25 +14,26 @@ import OtherUserPage from '../pages/otherUserPage/OtherUserPage';
 import YourTastesPage from '../pages/yourTastesPage/YourTastesPage';
 import AccessTokenProvider from '../accessTokenContext';
 
+
 function App() {
   return (
     <AccessTokenProvider>
     <BrowserRouter>
-    <Routes>
-     <Route path="/" element={<LoginPage />} />
-     <Route path="/:id" element={<NavigationBar />} >
-     <Route path="/:id/home" element={<HomePage />} />
-     <Route path="/:id/forum" element={<ForumPage />} />
-     <Route path="/:id/inbox" element={<InboxPage />} />
-     <Route path="/:id/likedSongs" element={<LikedSongsPage />} />
-     <Route path="/:id/profile" element={<ProfilePage />} />
-     <Route path="/:id/topArtists" element={<TopArtistsPage />} />
-     <Route path="/:id/topSongs" element={<TopSongsPage />} />
-     <Route path="/:id/discover" element={<DiscoverPage />} />
-     <Route path="/:id/otherUser" element={<OtherUserPage />} />
-     <Route path="/:id/yourTastes" element={<YourTastesPage />} />
-     </Route>
-     </Routes>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/:id" element={<NavigationBar />} >
+          <Route path="/:id/home" element={<HomePage />} />
+          <Route path="/:id/forum" element={<ForumPage />} />
+          <Route path="/:id/inbox" element={<InboxPage />} />
+          <Route path="/:id/likedSongs" element={<LikedSongsPage />} />
+          <Route path="/:id/profile" element={<ProfilePage />} />
+          <Route path="/:id/topArtists" element={<TopArtistsPage />} />
+          <Route path="/:id/topSongs" element={<TopSongsPage />} />
+          <Route path="/:id/discover" element={<DiscoverPage />} />
+          <Route path="/:id/:otherId/otherUser" element={<OtherUserPage />} />
+          <Route path="/:id/yourTastes" element={<YourTastesPage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
     </AccessTokenProvider>
   );
