@@ -34,8 +34,7 @@ export default function ForumPost() {
 
   const onSubmit = (e) => {
     const newUserPost = {
-      user: userData.result._document.data.value.mapValue.fields.username
-        .stringValue,
+      user: userData.result.username,
       message: isMessage.toString(),
     };
     addNewPost(newUserPost);

@@ -100,23 +100,6 @@ body {
 .student-grade-row p {
   font-size: 1.5rem;
 }
-.button-wrapper {
-  display: flex;
-  justify-content: right;
-  width: 10%;
-}
-
-.button-wrapper button {
-  margin-left: 20px;
-  padding: 10px;
-  width: 7vw;
-  border: 1px solid white;
-  background-color: transparent;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 .average-grade {
   background-color: #eee;

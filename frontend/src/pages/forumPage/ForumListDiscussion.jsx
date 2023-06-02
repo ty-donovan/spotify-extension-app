@@ -12,9 +12,7 @@ export default function DiscussionPosts({
 }) {
   const [allUsers, setAllUsers] = useState();
   if (currentUser) {
-    currentUser =
-      currentUser.result._document.data.value.mapValue.fields.username
-        .stringValue;
+    currentUser = currentUser.result.username;
   }
 
   const navigate = useNavigate();
@@ -88,12 +86,8 @@ export default function DiscussionPosts({
         <p> {name}</p>
         <p>{message}</p>
       </div>
-      <button className="button-wrapper" onClick={addOrRemoveUpLikes}>
-        Likes: {likes.length}
-      </button>
-      <button className="button-wrapper" onClick={addOrRemoveDownLikes}>
-        Dislike: {dislikes.length}
-      </button>
+      <button onClick={addOrRemoveUpLikes}>Likes: {likes.length}</button>
+      <button onClick={addOrRemoveDownLikes}>Dislike: {dislikes.length}</button>
     </>
   );
 }
