@@ -104,7 +104,7 @@ function ProfilePage() {
             body: JSON.stringify(content)
         })
         await uploadPicture()
-        window.location.reload()
+        window.location.reload(true)
     }
     //toggling profile private or public
     async function makePublic() {

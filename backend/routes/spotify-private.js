@@ -24,7 +24,6 @@ router.get('/top-artists-short-term/:token', async (req, res) => {
 
 router.get('/top-tracks-long-term/:token', async (req, res) => {
     const accessToken = req.params.token;
-
     const data = await getTopTracks(accessToken, "long_term");
     res.send(data);
 });
