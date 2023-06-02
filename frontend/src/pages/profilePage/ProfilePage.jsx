@@ -104,8 +104,7 @@ function ProfilePage() {
             body: JSON.stringify(content)
         })
         await uploadPicture()
-        setIsEdit(!isEdit)
-        setIsDataChanged(!isDataChanged)
+        window.location.reload()
     }
     //toggling profile private or public
     async function makePublic() {
