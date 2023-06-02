@@ -105,24 +105,24 @@ function OtherUserPage() {
                     </div>
                     <div className='bioBox'>
                         {(userProfile.bio || userProfile.favoriteArtist || userProfile.favoriteSong || userProfile.favoriteAlbum) &&
-                            <h1>About:</h1>}
+                            <h1 style={{ marginLeft: "1%" }}>About:</h1>}
                         {userProfile.bio &&
-                            <h2>{userProfile.bio}</h2>
+                            <h2 style={{ marginLeft: "1%" }}>{userProfile.bio}</h2>
                         }
                         {userProfile.favoriteArtist &&
                             <>
-                                <h2>Favorite Artist:</h2>
-                                <h3>{userProfile.favoriteArtist}</h3>
+                                <h2 style={{ marginLeft: "1%" }}>Favorite Artist:</h2>
+                                <h3 style={{ marginLeft: "1%" }}>{userProfile.favoriteArtist}</h3>
                             </>}
                         {userProfile.favoriteSong &&
                             <>
-                                <h2>Favorite Song:</h2>
-                                <h3>{userProfile.favoriteSong}</h3>
+                                <h2 style={{ marginLeft: "1%" }}>Favorite Song:</h2>
+                                <h3 style={{ marginLeft: "1%" }}>{userProfile.favoriteSong}</h3>
                             </>}
                         {userProfile.favoriteAlbum &&
                             <>
-                                <h2>Favorite Album:</h2>
-                                <h3>{userProfile.favoriteAlbum}</h3>
+                                <h2 style={{ marginLeft: "1%" }}>Favorite Album:</h2>
+                                <h3 style={{ marginLeft: "1%" }}>{userProfile.favoriteAlbum}</h3>
                             </>}
                     </div>
                 </>
