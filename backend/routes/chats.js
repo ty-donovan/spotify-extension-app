@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./firebase.js');
-const { collection, doc: docRef, query, where, getDocs, addDoc, getDoc } = require("firebase/firestore");
-
+const { collection, doc: docRef, query, where, getDocs, addDoc, getDoc, Timestamp } = require("firebase/firestore");
+const { orderBy } = require('firebase/firestore');
 
 router.get('/', async (req,res) => {
     const {userId} = req.query;
@@ -68,27 +68,11 @@ router.get('/:id', async (req, res) => {
     
         const chat = {id: chatDoc.id, ...chatDoc.data()};
     
-        const messagesSnapshot = await getDocs(collection(chatRef, 'messages'));
+        // Order messages by createdAt timestamp
+        const messagesQuery = query(collection(chatRef, 'messages'), orderBy('createdAt'));
+        const messagesSnapshot = await getDocs(messagesQuery);
         chat.messages = await Promise.all(messagesSnapshot.docs.map(async (messageDoc) => {
-            const message = {id: messageDoc.id, ...messageDoc.data()};
-          
-            // Parse the senderId to get the userId
-            // console.log('message.senderId:', message.senderId);
-            const userId = typeof message.senderId === 'string' ? 
-                message.senderId.split('/')[2] : // If senderId is a string
-                message.senderId._key.path.segments[1]; // If senderId is a DocumentReference
-          
-            // Fetch the user details
-            const userRef = docRef(db, 'users', userId);  
-            const userDoc = await getDoc(userRef);
-          
-            // If the user document exists, include it in the message
-            if (userDoc.exists()) {
-              message.sender = userDoc.data();
-            //   console.log('message sender:', message.sender);
-            }
-          
-            return message;
+            //... same as before
         }));
     
         res.json(chat);
@@ -97,6 +81,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({error: 'Error fetching chat'});
       }
 });
+
 
 router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
@@ -129,7 +114,7 @@ router.post('/:chatId/messages', async (req,res) => {
 
     try {
         const messagesRef = collection(docRef(db, 'chats', chatId), 'messages');
-        const newDoc = await addDoc(messagesRef, { senderId: formattedSenderId, text });
+        const newDoc = await addDoc(messagesRef, { senderId: formattedSenderId, text, createdAt: Timestamp.now() }); // add createdAt here
         
         res.json({message: "Message sent", id: newDoc.id});
     } catch (error){

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ChatList from './ChatList';
 import ChatDetail from './ChatDetail';
-import { Grid, Box, Paper, styled } from '@mui/material';
+import { Grid, Paper, styled } from '@mui/material';
 
 const FullHeightPaper = styled(Paper)({
     height: 'calc(100vh - 64px - 20px)', // Subtract the height with the top margin you want

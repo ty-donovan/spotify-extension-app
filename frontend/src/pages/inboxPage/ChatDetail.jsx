@@ -14,13 +14,13 @@ const FixedBox = styled(Box)({
 
 const ScrollableBox = styled(Box)({
     overflowY: 'scroll',
-    maxHeight: 'calc(100vh - 180px)', 
+    maxHeight: 'calc(100vh - 200px)', 
 });
     
 
 const RelativeContainer = styled(Container)({
     position: 'relative',
-    height: 'calc(100vh - 100px)', 
+    height: 'calc(100vh - 135px)', 
   });
 
 function ChatDetail({ chatId }) {
@@ -56,7 +56,7 @@ function ChatDetail({ chatId }) {
 
     if (res.status === 200) {
       setMessage('');
-      fetchChat(chatId);
+      fetchChat(chatId);  // refetch chat after sending a new message
     } else {
       console.error(data.error);
     }
@@ -66,9 +66,10 @@ function ChatDetail({ chatId }) {
     <RelativeContainer>
       <ScrollableBox>
         {chat && chat.messages.map((message, index) => (
-          <Message key={message.id} message={message} />
+          <Message key={message.id} message={message} isFirstMessage={index === 0}/>
         ))}
       </ScrollableBox>
+
 
       <FixedBox component="form" onSubmit={sendMessage}>
         <TextField 
