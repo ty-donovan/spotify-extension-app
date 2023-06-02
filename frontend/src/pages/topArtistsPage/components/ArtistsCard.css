@@ -1,0 +1,92 @@
+
+.top-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(54, 53, 53, 0.5);
+  position: relative;
+  /* border: 2px solid green; */
+}
+
+.top-card img {
+  width: 55%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.top-card div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  padding: 1em;
+  width: calc(100% - 2em);
+  height: calc(100% - 2em);
+}
+
+.top-card div h2 {
+  font-size: calc(2em - 0.08vw);
+  margin: 0;
+}
+
+.top-card div p {
+  font-size: calc(1.5em - 0.08vw);
+}
+
+.top-card .box {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.top-card .box p {
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+  padding-top: 20%;
+}
+
+@media (max-width: 768px) {
+  .top-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .top-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .top-card div {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .top-card div h2 {
+    font-size: 1.6em;
+    margin: 10px 0;
+  }
+
+  .top-card div p {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+
+  .top-card .box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    top: auto;
+    right: 0;
+    display: flex;
+    justify-content: center;
+  }
+}

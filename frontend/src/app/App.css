@@ -38,7 +38,8 @@ p, h1, h2, h3, h4, h5, h6 {
 :root{
     /* add custom colors here */
     --white: #ffffff;
-    --black: #000000;
+    --black: #0e1111;
+    --grey: #232b2b;
     --blue: #355070;
     --purple: #6D597A;
 
@@ -49,7 +50,6 @@ p, h1, h2, h3, h4, h5, h6 {
 
 *{
     /* font-family: var(--font-family); */
-    font-family: var(--font-family);
     font-weight: var(--font-weight);
     font-style: var(--font-style);
 }
