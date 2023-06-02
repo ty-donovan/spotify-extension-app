@@ -1,12 +1,30 @@
 import { useEffect, useState } from "react";
 import ForumPostList from "./ForumPostList";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 export default function ForumPost() {
-  const [postId, setPostId] = useState("Uj0Ve2fJELzvqU7FhPqZ");
   const [discussBoard, setDiscussBoard] = useState();
   const [isAddPost, setIsAddPost] = useState(false);
-  const [isMessage, setMessage] = useState();
-  let user = "Real Test";
+  const [isMessage, setMessage] = useState("");
+  const [userData, setUserData] = useState();
+  const userId = useParams().id;
+  const postId = useParams().postid;
+  async function getUserData(id) {
+    let content = { id: id };
+    await fetch("http://localhost:9000/profile/isUser", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(content),
+    })
+      .then((response) => response.json())
+      .then((data) => setUserData(data));
+  }
+  useEffect(() => {
+    getUserData(userId);
+  }, [userId]);
+
   useEffect(() => {
     fetch(`http://localhost:9000/profile/forum/${postId}`)
       .then((res) => res.json())
@@ -16,9 +34,9 @@ export default function ForumPost() {
 
   const onSubmit = (e) => {
     const newUserPost = {
-      user: user,
+      user: userData.result._document.data.value.mapValue.fields.username
+        .stringValue,
       message: isMessage.toString(),
-      likes: 0,
     };
     addNewPost(newUserPost);
   };

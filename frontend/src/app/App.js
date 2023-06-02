@@ -12,6 +12,7 @@ import TopSongsPage from "../pages/topSongsPage/TopSongsPage";
 import DiscoverPage from "../pages/discoverPage/DiscoverPage";
 import OtherUserPage from "../pages/otherUserPage/OtherUserPage";
 import YourTastesPage from "../pages/yourTastesPage/YourTastesPage";
+import ForumPost from "../pages/forumPage/ForumPost";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/:id" element={<NavigationBar />}>
           <Route path="/:id/home" element={<HomePage />} />
           <Route path="/:id/forum" element={<ForumPage />} />
+          <Route path="/:id/forum/:postid" element={<ForumPost />} />
           <Route path="/:id/inbox" element={<InboxPage />} />
           <Route path="/:id/likedSongs" element={<LikedSongsPage />} />
           <Route path="/:id/profile" element={<ProfilePage />} />
