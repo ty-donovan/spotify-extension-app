@@ -1,9 +1,9 @@
 import React from 'react';
 import './HomePage.css';
 import logoHighRes from './logo-high-res.png'
-import discover from './discover.jpg';
-import forum from './forum.jpg';
-import yourTastes from './your-tastes.png';
+import discover from './discover1.jpg';
+import forum from './forum1.jpg';
+import yourTastes from './tastes1.jpg';
 import useWindowSize from './useWindowSize';
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, Typography } from '@mui/material';
 import { Link, Outlet, useParams } from 'react-router-dom';
