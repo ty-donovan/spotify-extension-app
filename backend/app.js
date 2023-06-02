@@ -3,15 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 
 var profileRouter = require('./routes/profile');
 var spotifyPrivateRouter = require('./routes/spotify-private');
 var spotifyPublicRouter = require('./routes/spotify-public');
 var authRouter = require('./routes/auth');
+var chatsRouter = require('./routes/chats');
 
 var app = express();
 
 // cors configuration
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -35,6 +38,7 @@ app.use('/profile', profileRouter);
 app.use('/spotify-private', spotifyPrivateRouter);
 app.use('/spotify-public', spotifyPublicRouter);
 app.use('/auth', authRouter);
+app.use('/chats', chatsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

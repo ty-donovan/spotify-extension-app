@@ -1,20 +1,20 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "../pages/loginPage/LoginPage";
-import HomePage from "../pages/homePage/HomePage";
-import NavigationBar from "../pages/homePage/NavigationBar";
-import ForumPage from "../pages/forumPage/ForumPage";
-import InboxPage from "../pages/inboxPage/InboxPage";
-import LikedSongsPage from "../pages/likedSongsPage/LikedSongsPage";
-import ProfilePage from "../pages/profilePage/ProfilePage";
-import TopArtistsPage from "../pages/topArtistsPage/TopArtistsPage";
-import TopSongsPage from "../pages/topSongsPage/TopSongsPage";
-import DiscoverPage from "../pages/discoverPage/DiscoverPage";
-import OtherUserPage from "../pages/otherUserPage/OtherUserPage";
-import YourTastesPage from "../pages/yourTastesPage/YourTastesPage";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LoginPage from '../pages/loginPage/LoginPage';
+import HomePage from '../pages/homePage/HomePage'
+import NavigationBar from '../pages/homePage/NavigationBar';
+import ForumPage from '../pages/forumPage/ForumPage';
+import InboxPage from '../pages/inboxPage/InboxPage';
+import LikedSongsPage from '../pages/likedSongsPage/LikedSongsPage';
+import ProfilePage from '../pages/profilePage/ProfilePage';
+import TopArtistsPage from '../pages/topArtistsPage/TopArtistsPage';
+import TopSongsPage from '../pages/topSongsPage/TopSongsPage';
+import DiscoverPage from '../pages/discoverPage/DiscoverPage';
+import OtherUserPage from '../pages/otherUserPage/OtherUserPage';
+import YourTastesPage from '../pages/yourTastesPage/YourTastesPage';
 import ForumPost from "../pages/forumPage/ForumPost";
 import AccessTokenProvider from '../accessTokenContext';
-
+import ChatDetail from '../pages/inboxPage/ChatDetail';
 
 function App() {
   return (
@@ -42,3 +42,4 @@ function App() {
 }
 
 export default App;
+
