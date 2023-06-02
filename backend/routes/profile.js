@@ -76,4 +76,10 @@ router.put("/make-public", async (req, res, next) => {
     res.sendStatus(200);
 })
 
+//setting hasPic
+router.put("/has-pic", async (req, res) => {
+    await updateDoc(doc(db, "users", userId), {
+        hasPic: req.body.hasPic
+    })
+})
 module.exports = router;

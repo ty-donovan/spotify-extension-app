@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom'
+import { Link, Outlet, useParams, useOutletContext } from 'react-router-dom'
 import { Button, TextField } from '@mui/material';
 import silhouette from './silhouette.png';
 import './ProfilePage.css';
@@ -17,6 +17,8 @@ function ProfilePage() {
     const [isDataChanged, setIsDataChanged] = useState(false);
     const [profilePic, setProfilePic] = useState();
     const [isPictureChanged, setIsPictureChanged] = useState(false)
+    const [isCurrentUser, setIsCurrentUser] = useState(false)
+    let currentUser = useOutletContext();
     //fetching current user
     async function getUserData(id) {
         let content = { id: id };
@@ -48,9 +50,16 @@ function ProfilePage() {
                 favoriteAlbum: userData.result.favoriteAlbum,
             })
     }, [userData])
+
+    useEffect(() => {
+        if (currentUser)
+            setIsCurrentUser(true)
+    }, [currentUser])
+
     useEffect(() => {
         getPic()
-    }, [isPictureChanged])
+    }, [isCurrentUser, isPictureChanged])
+
     async function uploadPicture() {
         if (selectedImage) {
             await fetch("http://localhost:9000/profile/upload", {
@@ -60,6 +69,16 @@ function ProfilePage() {
                 },
                 body: selectedImage
             }).catch(error => { console.log(error) })
+            if (currentUser.hasPic !== true) {
+                let body = { hasPic: true }
+                await fetch("http://localhost:9000/profile/has-pic", {
+                    method: "put",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                })
+            }
             setIsPictureChanged(!isPictureChanged);
         }
     }
@@ -84,7 +103,7 @@ function ProfilePage() {
             },
             body: JSON.stringify(content)
         })
-        await uploadPicture();
+        await uploadPicture()
         setIsEdit(!isEdit)
         setIsDataChanged(!isDataChanged)
     }
@@ -106,16 +125,20 @@ function ProfilePage() {
     }
 
     async function getPic() {
-        let content = { id: userId }
-        await fetch("http://localhost:9000/profile/get-picture", {
-            method: "put",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(content)
-        })
-            .then((response) => response.json())
-            .then((data) => setProfilePic(data))
+        if (isCurrentUser && currentUser.hasPic) {
+            let content = { id: userId }
+            await fetch("http://localhost:9000/profile/get-picture", {
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(content)
+            })
+                .then((response) => response.json())
+                .then((data) => setProfilePic(data))
+
+        }
+
     }
 
     return (

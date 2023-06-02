@@ -33,7 +33,7 @@ export default function NavigationBar() {
     }, [userId])
     useEffect(() => {
         if (userData) {
-            setCurrentUser({ username: userData.result.username })
+            setCurrentUser({ username: userData.result.username, hasPic: userData.result.hasPic })
         }
     }, [userData])
 

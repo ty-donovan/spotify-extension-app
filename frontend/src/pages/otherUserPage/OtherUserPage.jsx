@@ -14,6 +14,8 @@ function OtherUserPage() {
     const [userData, setUserData] = useState();
     const [userProfile, setUserProfile] = useState();
     const [isDataChanged, setIsDataChanged] = useState(false);
+    const [profilePic, setProfilePic] = useState();
+    const [otherUser, setOtherUser] = useState();
     //fetching current user
     async function getUserData(id) {
         let content = { id: id };
@@ -46,13 +48,36 @@ function OtherUserPage() {
             })
     }, [userData])
 
+    async function getPic() {
+        if (userData && userData.result.hasPic) {
+            let content = { id: otherId }
+            await fetch("http://localhost:9000/profile/get-picture", {
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(content)
+            })
+                .then((response) => response.json())
+                .then((data) => setProfilePic(data))
+        }
+    }
+
+
+    useEffect(() => {
+        getPic()
+    }, [userData])
+
     return (
         <>
             {!userProfile ? <h1>Loading...</h1> :
                 <>
                     <div className='profileBox'>
                         <div className='imageBox'>
-                            <img src={silhouette} alt='profile picture' className='profilePic'></img>
+                            {profilePic ? <img src={profilePic.url} alt='profile picture' className='profilePic'></img> :
+                                <img src={silhouette} alt='profile picture' className='profilePic'></img>
+                            }
+
                         </div>
                         <div className='textBox'>
                             {(size.width > 600) &&
