@@ -32,7 +32,6 @@ function LoginPage({ setUser }) {
         });
       } else {
         const code = searchParams.get("code");
-        console.log("code", code);
         fetch("http://localhost:9000/auth/callback?code=" + code)
           .then((res) => res.json())
           .then((data) => {
@@ -98,7 +97,7 @@ function LoginPage({ setUser }) {
                     type='password'
                     sx={{ width: '150%', m: '5%' }}
                 />
-                <Button type = "submit" variant='contained' sx={{width: '80%', m: '5%'}}>Login</Button>
+                <Button type = "submit" sx={{width: '80%', m: '5%', backgroundColor: "#363535", color: "white"}}>Login</Button>
             </form>
             <Snackbar
               open={showError}

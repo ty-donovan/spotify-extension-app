@@ -18,10 +18,10 @@ router.get("/", async (req, res, next) => {
       redirect_uri +
       "&scope=" +
       scope;
-    console.log(url);
+
     res.status(200).json({ url: url });
   } catch (err) {
-    console.log(err);
+
     res.status(500).send(err);
   }
 });
@@ -40,13 +40,11 @@ router.get("/callback", async (req, res, next) => {
         Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
     };
-    console.log(url);
-    console.log(headers);
+
     fetch(url, { method: "post", headers: headers })
       .catch((err) => console.log(err))
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         obj = {
           token: data.access_token,
         };
