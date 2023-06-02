@@ -35,7 +35,7 @@ export default function Forum() {
 
   const onSubmit = (e) => {
     const newUserPost = {
-      user: userData.result._document.data.value.mapValue.fields.username
+      user: userData.result.username
         .stringValue,
       message: isMessage.toString(),
       likes: [],

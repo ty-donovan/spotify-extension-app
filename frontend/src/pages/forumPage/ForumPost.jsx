@@ -34,7 +34,7 @@ export default function ForumPost() {
 
   const onSubmit = (e) => {
     const newUserPost = {
-      user: userData.result._document.data.value.mapValue.fields.username
+      user: userData.result.username
         .stringValue,
       message: isMessage.toString(),
     };
@@ -61,14 +61,14 @@ export default function ForumPost() {
       ) : null}
       {discussBoard
         ? discussBoard.posts.map((doc, index) => (
-            <div key={index}>
-              <ForumPostList
-                user={doc.user}
-                message={doc.message}
-                likes={doc.likes}
-              />
-            </div>
-          ))
+          <div key={index}>
+            <ForumPostList
+              user={doc.user}
+              message={doc.message}
+              likes={doc.likes}
+            />
+          </div>
+        ))
         : null}
       <div>
         <button onClick={setNewPost}>New post </button>

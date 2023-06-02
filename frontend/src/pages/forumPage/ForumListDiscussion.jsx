@@ -13,7 +13,7 @@ export default function DiscussionPosts({
   const [allUsers, setAllUsers] = useState();
   if (currentUser) {
     currentUser =
-      currentUser.result._document.data.value.mapValue.fields.username
+      currentUser.result.username
         .stringValue;
   }
 
