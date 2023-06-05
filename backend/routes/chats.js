@@ -12,14 +12,12 @@ router.get('/', async (req,res) => {
     }
 
     const formattedUserId = `/users/${userId}`;
-    console.log('formatted user id: ',formattedUserId);
 
     try {
         const chatsRef = collection(db, 'chats');
         const q = query(chatsRef, where('participants', 'array-contains', formattedUserId));
         const snapshot = await getDocs(q);
         // console.log('query: ',q);
-        console.log('Number of chats found:', snapshot.size);
 
         const chats = [];
         for (let doc of snapshot.docs) {
@@ -32,8 +30,6 @@ router.get('/', async (req,res) => {
                 const userId = typeof message.senderId === 'string' ? 
                     message.senderId.split('/')[2] : // If senderId is a string
                     message.senderId._key.path.segments[1]; // If senderId is a DocumentReference
-
-                console.log('user id: ', userId);
                 // Fetch the user details
                 const userRef = docRef(db, 'users', userId);
                 const userDoc = await getDoc(userRef);
@@ -41,7 +37,7 @@ router.get('/', async (req,res) => {
                 // If the user document exists, include it in the message
                 if (userDoc.exists()) {
                     message.sender = userDoc.data();
-                    console.log('message sender:', message.sender);
+
                 }
         
                 return message;

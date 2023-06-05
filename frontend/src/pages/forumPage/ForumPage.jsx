@@ -98,7 +98,7 @@ export default function Forum() {
         <div className="average-grade">
           <h1>Welcome to the Forum</h1>
         </div>
-        <button onClick={newMessage}>Add New Post</button>
+        <button onClick={newMessage} className="post">Add New Post</button>
         {newPost ? (
           <form onSubmit={onSubmit}>
             <label>
@@ -125,7 +125,7 @@ export default function Forum() {
             />
           </form>
         </div>
-        <div>
+        <div className="forum-title">
           <h1
             style={{
               display: "flex",

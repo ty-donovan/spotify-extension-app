@@ -10,7 +10,6 @@ function TopArtistsPage() {
   const { accessToken } = useContext(AccessTokenContext);
   const [topArtists, setTopArtists] = useState([]);
 
-  console.log(accessToken);
 
   useEffect(() => {
     axios
@@ -67,7 +66,6 @@ function TopArtistsPage() {
       });
   };
 
-  console.log(topArtists);
   const [selectedButton, setSelectedButton] = useState("12 Months +");
 
   return (

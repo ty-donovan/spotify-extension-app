@@ -71,7 +71,6 @@ h6 {
 
 * {
   /* font-family: var(--font-family); */
-  font-family: var(--font-family);
   font-weight: var(--font-weight);
   font-style: var(--font-style);
 }
@@ -88,7 +87,7 @@ body {
   justify-content: space-between;
   margin: auto;
   margin-top: 2%;
-  width: 85%;
+  width: 100%;
   height: 10vh;
   border-radius: 15px;
   transition: all 0.4s ease;
@@ -116,4 +115,27 @@ body {
   transition: all 0.4s ease;
   border: none;
   padding: 0 100px 0 100px;
+}
+
+.forumPage button {
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 10px;
+  width: 7vw;
+  border: none;
+  background-color: #eee;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.forumPage button:hover {
+  background-color: #363535;
+  color: white;
+}
+
+.forumPage .post {
+  width: 15vw;
+  margin-bottom: 10px;
 }

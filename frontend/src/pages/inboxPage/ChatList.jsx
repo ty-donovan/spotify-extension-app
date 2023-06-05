@@ -14,10 +14,6 @@ function ChatList({ onChatSelect }) {
 
     const data = await res.json();
 
-    console.log('Data from server:', data); 
-    console.log('Participants:', data.participants);
-    console.log('Messages:', data.messages);
-
     if (res.status === 200) {
         setChats(data);
       } else {
