@@ -32,8 +32,8 @@ Currently in developer mode. For use you will have to head to the spotify for de
 4. Copy your client ID and your client secret you get the client secret by clicking the small “View client secret” link right below the client ID
 5. Clone the repository and cd into the frontend folder and npm i (to install packages) and repeat this with the backend folder
 6. Now create a .env file in to root of the backend folder and paste your client id and client secret in the following format format
-   i. client_id=”your client id here”
-   ii. secret=”your client secret here”
+   1. client_id=”your client id here”
+   2. secret=”your client secret here”
 7. Now save those files and restart your code editor (just incase there a issues with the editor and .env file saving properly)
 
 Currently, there is no public Firestore database for use with Spots. You will have to create your own.
@@ -52,9 +52,10 @@ Having done the above, most functionality will work with Spots. If you would lik
 2. Create a folder in storage titled “profilePictures”.
 3. From the project overview tab of the Firebase dashboard, add a new web app to your project. The title of this is irrelevant.
 4. From the settings page for the added web app, scroll to the “sdk setup and configuration setting” and copy the line that will look like this:
-   i. storageBucket: "your-project.appspot.com"
+   1. storageBucket: "your-project.appspot.com"
 5. Paste this line into “permissions.json” from before.
-   All functionality with Spots should now be set up.
+
+All functionality with Spots should now be set up.
 
 ## How To Use:
 
