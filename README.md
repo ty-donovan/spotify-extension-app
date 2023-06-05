@@ -102,7 +102,7 @@ As for now, all major features except direct messaging are functional. We are co
 
 ## Credits
 
-- Nolan Hill: [Named Link](https://github.com/NolanReedHill "Github"), [Named Link](http://www.linkedin.com/in/nolan-hill-b980981b1 "Linkedin")
-- Tyler Donovan: [Named Link](https://github.com/ty-donovan "Github"), [Named Link](https://www.linkedin.com/in/donovantylert/ "Linkedin")
-- Marina Lin: [Named Link](https://github.com/Lamarina0612 "Github"), [Named Link](https://www.linkedin.com/in/shuojia-lin-4719801b9/ "Linkedin")
-- Dio Suliman: [Named Link](https://github.com/DecentDio "Github"), [Named Link](https://www.linkedin.com/in/dio-suliman-742190239/ "Linkedin")
+- Nolan Hill: [Github](https://github.com/NolanReedHill), [Linkedin](http://www.linkedin.com/in/nolan-hill-b980981b1)
+- Tyler Donovan: [Github](https://github.com/ty-donovan), [Linkedin](https://www.linkedin.com/in/donovantylert/)
+- Marina Lin: [Github](https://github.com/Lamarina0612), [Linkedin](https://www.linkedin.com/in/shuojia-lin-4719801b9/)
+- Dio Suliman: [Github](https://github.com/DecentDio), [Linkedin](https://www.linkedin.com/in/dio-suliman-742190239/)
